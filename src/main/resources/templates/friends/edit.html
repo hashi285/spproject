@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>친구정보 수정</title>
+</head>
+<body>
+<h1>친구정보 수정 </h1>
+<form th:action="@{/friends/add}" method="post" th:object="${friend}">
+    <input type="hidden" th:field="*{id}">
+    <br>
+    <label for="name"> 이름 :</label>
+    <input type="text" id="name" th:field="*{name}" required/>
+    <br>
+    <label for="password"> 비번 :</label>
+    <input type="text" id="password" th:field="*{password}" required />
+    <br>
+    <label for="title"> 제목 :</label>
+    <input type="text" id="title" th:field="*{title}" required />
+    <br>
+    <label for="content" th:style="'font-size: 15px;'"> 내용 :</label>
+    <input type="text" id="content" th:field="*{content}" th:style="'font-size: 60px;'" required />
+    <br>
+    <input type="submit" value="친구 정보 수정">
+</form>
+
+
+
+
+
+<form th:action="@{/friends/check}" method="post" th:object="${friend}">
+    <input type="submit" value="패스워드 확인">
+    </form>
+</body>
+</html>
+
+
+

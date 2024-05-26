@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>친구 상세정보 페이지</title>
+</head>
+<body>
+<h2 th:text="${friend.name}">친구이름</h2>
+<div>
+    <strong>Title : </strong> <span th:text="${friend.title}">title
+</span>
+
+    <br>
+
+    <strong>내용 : </strong> <span th:text="${friend.content}">title
+    </span>
+
+</div>
+<a th:href="@{/friends}">돌아가기</a>
+<a th:href="@{/friends/edit/{id}(id=${friend.id})}">수정</a>
+<a th:href="@{/friends/delete/{id}(id=${friend.id})}">삭제</a>
+</body>
+</html>
