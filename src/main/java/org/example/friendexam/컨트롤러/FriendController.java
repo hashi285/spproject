@@ -1,6 +1,6 @@
 package org.example.friendexam.컨트롤러;
 import lombok.RequiredArgsConstructor;
-import org.example.friendexam.도메인.POST;
+import org.example.friendexam.도메인.Post;
 import org.example.friendexam.서비스.FriendService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,7 +21,7 @@ public class FriendController {
                           @RequestParam(defaultValue = "5") int size) {
         Pageable pageable = PageRequest.of(page - 1, size);
 
-        Page<POST> friends = friendService.findAllFriends(pageable);
+        Page<Post> friends = friendService.findAllFriends(pageable);
         model.addAttribute("friends", friends);
         model.addAttribute("currentPage", page);
         return "friends/list";
@@ -32,12 +31,12 @@ public class FriendController {
     // 글 추가 폼
     @GetMapping("/add")
     public String addForm(Model model) {
-        model.addAttribute("friend", new POST());
+        model.addAttribute("friend", new Post());
         return "friends/form";
     }
 
     @PostMapping("/add")
-    public String addFriend(@ModelAttribute POST friend) {
+    public String addFriend(@ModelAttribute Post friend) {
         friendService.saveFriend(friend);
 
         return "redirect:/friends";
@@ -50,7 +49,7 @@ public class FriendController {
 
 
 
-        POST friend = friendService.findFriendById((Long) id);
+        Post friend = friendService.findFriendById((Long) id);
         model.addAttribute("friend", friend);
         return "friends/detail";
     }
@@ -63,7 +62,7 @@ public class FriendController {
 
 
 
-        POST friend = friendService.findFriendById((Long) id);
+        Post friend = friendService.findFriendById((Long) id);
         model.addAttribute("friend", friend);
         return "friends/title";
     }
@@ -93,7 +92,7 @@ public class FriendController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editFriend(@ModelAttribute POST friend) {
+    public String editFriend(@ModelAttribute Post friend) {
         friendService.saveFriend(friend);
         return "redirect:/friends";
     }
@@ -102,7 +101,7 @@ public class FriendController {
     //비밀번호 확인
     @GetMapping("/check/{id}")
     public String Check(@PathVariable Long id, Model model){
-        POST friend = friendService.findFriendById((Long) id);
+        Post friend = friendService.findFriendById((Long) id);
         model.addAttribute("friend", friend);
 
         return "friends/check";
@@ -110,7 +109,7 @@ public class FriendController {
 
     @PostMapping("/check/{id}")
     public String Check1(@RequestParam("password") String password, @PathVariable("id") Long id) {
-        POST post = friendService.findFriendById((Long) id);
+        Post post = friendService.findFriendById((Long) id);
         if (post != null && post.getPassword().equals(password)) {
 
             return "redirect:/friends/{id}";

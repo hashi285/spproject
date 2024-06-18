@@ -1,10 +1,10 @@
 package org.example.friendexam.레포지토리;
 
-import org.example.friendexam.도메인.POST;
+import org.example.friendexam.도메인.Post;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface FriendRepository extends CrudRepository<POST,Long>, PagingAndSortingRepository<POST,Long> {
+public interface FriendRepository extends CrudRepository<Post,Long>, PagingAndSortingRepository<Post,Long> {
 }
 
 
